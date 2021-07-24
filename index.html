@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Startup</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <!-- Bootstrap CSS from a CDN. This way you don't have to include the bootstrap file yourself -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Your own stylesheet -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+     <h1 class="666">The Biggest Startup Event of the YEAR</h1>
+     <button>Find out more</button>
+     <button id="bt">Click Me</button>
+     <script type="text/javascript">
+      const ragicApiKey = 'V2p1TmhjZG0zUG1QdzMvVEJFL1YvbEVuaHIwWXViV3M4V1VpTmNUam9zVEJ6OXhRZWRSZzZYaWQwbTNzemd0WA==';
+    const ragicUrl = 'https://www.ragic.com/guanhou/api-practice/1?v=3&api&where=1013145,eq,00001';
+    document.getElementById('bt').onclick = async function() {
+  const urlToFetch = `${ragicUrl}&APIKey=${ragicApiKey}`;
+  try{
+    const response = await fetch(urlToFetch);
+    if(response.ok){
+      const jsonResponse = await response.json();
+      console.log(jsonResponse["0"]["_subtable_1013151"]["0"]["Photo"]);
+      let love = jsonResponse["0"]["_subtable_1013151"]["0"]["Photo"];
+      
+      let text = `<img class="venueimage" src="https://www.ragic.com/sims/file.jsp?a=guanhou&f=${love}"/>`;
+      let urll = `https://www.ragic.com/sims/file.jsp?a=guanhou&f=${love}`;
+      //document.querySelector('.666').innerHTML = text;
+      let image = document.createElement('img');
+      image.src = urll;
+      document.body.appendChild(image);
+      console.log("all set");
+      return jsonResponse["0"];
+      
+    }
+  } catch (error) {console.log(error);}
+}
+</script>
+  </body>
+  
+</html>
