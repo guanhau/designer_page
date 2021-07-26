@@ -34,7 +34,8 @@
       const response = await fetch(urlToFetch);
       if(response.ok){
         const jsonResponse = await response.json();
-        let imgName = jsonResponse["0"]["_subtable_1013151"]["0"]["Photo"];
+        console.log(jsonResponse["0"]);
+        let imgName = jsonResponse["0"]["_subtable_1013151"]["1"]["Photo"];
         let imgUrl = `https://www.ragic.com/sims/file.jsp?a=guanhou&f=${imgName}`;
         let image = document.createElement('img');
         image.src = imgUrl;
