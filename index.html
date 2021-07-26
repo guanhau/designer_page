@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Startup</title>
+    <title>Api Reading Practice</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,35 +14,53 @@
     <!-- Your own stylesheet -->
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
-  <body>
-     <h1 class="666">The Biggest Startup Event of the Y3AR</h1>
-     <button>Find out more</button>
-     <button id="bt">Click Me</button>
+  <body onload="yoooo()" style="background-color: #000000;" >
+     <h1 style="text-align: center; color: white; padding: 25px; font-family: Monaco;">Taipei Street</h1>
+     <div id="666" style="text-align: center;"></div>
+     <div id="777" style="text-align: center; color: white; padding: 25px; font-family: Monaco;"></div>
+     <!--button>Find out more</button-->
+     <!--button id="bt">Click Me</button-->
      <script type="text/javascript">
-      const ragicApiKey = 'V2p1TmhjZG0zUG1QdzMvVEJFL1YvbEVuaHIwWXViV3M4V1VpTmNUam9zVEJ6OXhRZWRSZzZYaWQwbTNzemd0WA==';
+     const app = document.getElementById('666');
+     const webapp = document.getElementById('777');
+     const head = document.createElement('div');
+     head.setAttribute('class','head');
+
+     const ragicApiKey = 'V2p1TmhjZG0zUG1QdzMvVEJFL1YvbEVuaHIwWXViV3M4V1VpTmNUam9zVEJ6OXhRZWRSZzZYaWQwbTNzemd0WA==';
     const ragicUrl = 'https://www.ragic.com/guanhou/api-practice/1?v=3&api&where=1013145,eq,00001';
-    document.getElementById('bt').onclick = async function() {
-  const urlToFetch = `${ragicUrl}&APIKey=${ragicApiKey}`;
-  try{
-    const response = await fetch(urlToFetch);
-    if(response.ok){
-      const jsonResponse = await response.json();
-      console.log(jsonResponse["0"]["_subtable_1013151"]["0"]["Photo"]);
-      let love = jsonResponse["0"]["_subtable_1013151"]["0"]["Photo"];
+    const yoooo = async function() {
+      const urlToFetch = `${ragicUrl}&APIKey=${ragicApiKey}`;
+      try{
+      const response = await fetch(urlToFetch);
+      if(response.ok){
+        const jsonResponse = await response.json();
+        let imgName = jsonResponse["0"]["_subtable_1013151"]["0"]["Photo"];
+        let imgUrl = `https://www.ragic.com/sims/file.jsp?a=guanhou&f=${imgName}`;
+        let image = document.createElement('img');
+        image.src = imgUrl;
+        image.width = "800";
+        image.padding = '25';
+        app.appendChild(image);  
+
+        let contentText = jsonResponse["0"]["Content"]; 
+        let content = document.createElement('h3');
+        content.innerHTML = contentText;
+        webapp.appendChild(content);
+        console.log(jsonResponse["0"]);     
       
-      let text = `<img class="venueimage" src="https://www.ragic.com/sims/file.jsp?a=guanhou&f=${love}"/>`;
-      let urll = `https://www.ragic.com/sims/file.jsp?a=guanhou&f=${love}`;
-      //document.querySelector('.666').innerHTML = text;
-      let image = document.createElement('img');
-      image.src = urll;
-      document.body.appendChild(image);
-      console.log("all set");
-      return jsonResponse["0"];
       
     }
   } catch (error) {console.log(error);}
 }
-</script>
+
+
+     const container = document.createElement('div');
+     container.setAttribute('class','container');
+
+     app.appendChild(head);
+     app.appendChild(container);
+     </script> 
+     
   </body>
   
 </html>
