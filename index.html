@@ -34,14 +34,27 @@
       const response = await fetch(urlToFetch);
       if(response.ok){
         const jsonResponse = await response.json();
-        console.log(jsonResponse["0"]);
+        console.log(jsonResponse["0"]["_subtable_1013151"]);
         let imgName = jsonResponse["0"]["_subtable_1013151"]["1"]["Photo"];
-        let imgUrl = `https://www.ragic.com/sims/file.jsp?a=guanhou&f=${imgName}`;
-        let image = document.createElement('img');
-        image.src = imgUrl;
-        image.width = "800";
-        image.padding = '25';
-        app.appendChild(image);  
+        let imgs = jsonResponse["0"]["_subtable_1013151"]; //new 2021/08/07
+        let imageKeysArray = Object.keys(imgs);// 2021/08/07
+
+        for (var i = 0; i < imageKeysArray.length; i++){
+          let imgFileName = jsonResponse["0"]["_subtable_1013151"][`${imageKeysArray[i]}`]["Photo"];
+          let imgUrl = `https://www.ragic.com/sims/file.jsp?a=guanhou&f=${imgFileName}`;
+          let image = document.createElement('img');
+          image.src = imgUrl;
+          image.width = "800";
+          image.padding = '25';
+          app.appendChild(image);  
+        };//new 2021/08/07
+
+        //let imgUrl = `https://www.ragic.com/sims/file.jsp?a=guanhou&f=${imgName}`;
+        //let image = document.createElement('img');
+        //image.src = imgUrl;
+        //image.width = "800";
+        //image.padding = '25';
+        //app.appendChild(image);  
 
         let contentText = jsonResponse["0"]["Content"]; 
         let content = document.createElement('h3');
